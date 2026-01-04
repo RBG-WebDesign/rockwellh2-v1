@@ -64,10 +64,10 @@
             outline: none;
         }
 
-        /* Prevent Clipping on Italic Clipped Text */
+        /* FIX: Prevent Clipping on Italic Clipped Text */
         .hero-title-clip {
-            padding-bottom: 0.1em;
-            line-height: 1.15;
+            line-height: 1.25 !important; /* Increased from 1.15 to allow ascender/descender clearance */
+            overflow: visible !important;
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -150,9 +150,11 @@
                                 <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                                 <span id="home-badge" class="mono text-emerald-400 uppercase tracking-[0.2em] text-[11px] font-bold">Infrastructure Excellence</span>
                             </div>
-                            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.1] uppercase tracking-tight text-white hero-title-clip">
+                            <!-- Adjusted leading and added overflow visible class -->
+                            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.2] uppercase tracking-tight text-white hero-title-clip">
                                 <span id="home-h1-1" class="block">Industrial</span>
-                                <span id="home-h1-2" class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600 italic py-1">Hydrogen</span>
+                                <!-- Added pt-2 and px-2 to ensure bg-clip text doesn't cut slanted letters -->
+                                <span id="home-h1-2" class="inline-block pt-2 pb-1 px-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600 italic">Hydrogen</span>
                                 <span id="home-h1-3" class="block">Resilience.</span>
                             </h1>
                             <p id="home-subheadline" class="text-xl md:text-2xl text-slate-400 mb-14 leading-relaxed max-w-2xl font-light">
@@ -445,9 +447,9 @@
                 w1 /= norm; w2 /= norm; w3 /= norm;
 
                 float drift = u_scroll * 0.0004;
-                float yz = u_time * 0.12 + drift;
-                float xz = u_time * 0.08 + drift * 0.5;
-                mat3 rot = mat3(1,0,0,0,cos(yz),sin(yz),0,-sin(yz),cos(yz)) * mat3(cos(xz),0,sin(xz),0,1,0,-sin(xz),0,cos(xz));
+                float yz_ang = u_time * 0.12 + drift;
+                float xz_ang = u_time * 0.08 + drift * 0.5;
+                mat3 rot = mat3(1,0,0,0,cos(yz_ang),sin(yz_ang),0,-sin(yz_ang),cos(yz_ang)) * mat3(cos(xz),0,sin(xz),0,1,0,-sin(xz),0,cos(xz));
 
                 vec2 intensity = vec2(0.0);
                 for (float z = Z_FROM; z <= Z_TO; z += Z_STEP) {
