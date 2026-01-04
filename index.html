@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rockwell H2 Systems | Industrial Hardware</title>
+    <title>Rockwell H2 Systems | Industrial Hydrogen Infrastructure</title>
     
     <!-- SEO & Sharing -->
     <meta name="description" content="Rockwell H2 Systems provides site-integrated modular hardware for green hydrogen production, storage, and dispensing. Optimized for industrial resilience.">
@@ -12,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,16 +27,18 @@
                     },
                     colors: {
                         brand: {
-                            500: '#10b981', // Base Emerald
-                            600: '#059669', // Darker Emerald
-                            900: '#064e3b',
+                            500: '#10b981', // Emerald
+                            600: '#059669',
+                            700: '#047857',
                         },
-                        industrial: {
-                            bg: '#050505',
-                            panel: '#0a0a0a',
-                            border: '#27272a', // Zinc 800
-                            text: '#a1a1aa', // Zinc 400
+                        slate: {
+                            850: '#151e2e', // Custom lighter panel
+                            900: '#0f172a',
+                            950: '#020617',
                         }
+                    },
+                    backgroundImage: {
+                        'soft-gradient': 'radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, rgba(11, 17, 32, 0) 70%)',
                     }
                 }
             }
@@ -44,498 +46,477 @@
     </script>
     
     <style>
-        :root {
-            --bg-deep: #050505;
-            --panel-bg: #0a0a0a;
-            --border-crisp: 1px solid #27272a;
-        }
-
         body {
-            background-color: var(--bg-deep);
-            color: #f4f4f5;
+            background-color: #0b1120; /* Deep Slate */
+            color: #f1f5f9;
             -webkit-font-smoothing: antialiased;
-            /* Subtle grain texture overlay */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
         }
 
-        /* Utility Classes */
-        .matte-panel {
-            background-color: var(--panel-bg);
-            border: var(--border-crisp);
-            transition: border-color 0.2s ease, transform 0.2s ease;
+        /* OEM Panel Style */
+        .oem-panel {
+            background-color: rgba(30, 41, 59, 0.4); /* Slate-800 low opacity */
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px; /* Softer corners */
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
         }
         
-        .matte-panel:hover {
-            border-color: #3f3f46;
+        .oem-panel:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
         }
 
-        .border-b-crisp { border-bottom: var(--border-crisp); }
-        .border-t-crisp { border-top: var(--border-crisp); }
-        .border-r-crisp { border-right: var(--border-crisp); }
-
-        .text-tech {
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        /* Primary Button */
+        .btn-primary {
+            background-color: #10b981;
+            color: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+        }
+        .btn-primary:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.23);
         }
 
-        /* Custom Range Slider - Machined Look */
+        /* Secondary Button */
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Custom Range Slider */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
             background: transparent;
         }
-
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             height: 20px;
-            width: 12px;
-            border-radius: 2px;
-            background: #e4e4e7;
+            width: 20px;
+            border-radius: 50%;
+            background: #10b981;
             cursor: pointer;
-            margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 2px solid #0f172a;
         }
-
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: #27272a;
-            border-radius: 0px;
+            background: #334155;
+            border-radius: 2px;
         }
-        
-        input[type=range]:focus {
-            outline: none;
-        }
-        
-        input[type=range]:focus::-webkit-slider-runnable-track {
-            background: #3f3f46;
-        }
+        input[type=range]:focus { outline: none; }
 
-        /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Status Dot */
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #10b981;
-        }
-        
-        /* Grid Lines */
-        .grid-line-y {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background-color: #27272a;
-            z-index: -1;
-        }
     </style>
 </head>
-<body class="selection:bg-brand-600 selection:text-white">
-
-    <!-- Vertical Grid Lines (Background Decoration) -->
-    <div class="fixed inset-0 pointer-events-none max-w-7xl mx-auto px-6 border-l border-r border-zinc-800/50 hidden md:block">
-        <div class="grid grid-cols-4 h-full">
-            <div class="border-r border-zinc-800/30 h-full"></div>
-            <div class="border-r border-zinc-800/30 h-full"></div>
-            <div class="border-r border-zinc-800/30 h-full"></div>
-        </div>
-    </div>
+<body class="bg-soft-gradient bg-fixed">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-[#050505]/95 border-b border-zinc-800 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                <div class="w-8 h-8 bg-white text-black flex items-center justify-center font-bold rounded-sm text-sm">
+    <nav class="fixed top-0 w-full z-50 bg-[#0b1120]/80 border-b border-white/5 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <div class="w-9 h-9 bg-emerald-500 text-white flex items-center justify-center font-bold rounded-md shadow-lg shadow-emerald-900/20">
                     R
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-sm font-bold tracking-tight text-white uppercase">Rockwell H2</span>
-                    <span class="text-[9px] text-tech text-zinc-500">Sys_Config_v8.2</span>
+                    <span class="text-base font-bold text-white tracking-tight">Rockwell H2</span>
+                    <span class="text-xs text-slate-400">Industrial Systems</span>
                 </div>
             </div>
 
             <div class="hidden lg:flex items-center gap-8">
-                <a href="#technology" class="text-xs font-medium text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Architecture</a>
-                <a href="#solutions" class="text-xs font-medium text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Deployments</a>
-                <a href="#sizing" class="text-xs font-medium text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Configurator</a>
-                <div class="h-4 w-px bg-zinc-800"></div>
-                <a href="#contact" class="flex items-center gap-2 text-xs font-bold text-brand-500 hover:text-brand-400 uppercase tracking-widest transition-colors">
-                    <span class="status-dot"></span>
+                <a href="#products" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Products</a>
+                <a href="#benefits" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Benefits</a>
+                <a href="#sizing" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Sizing Tool</a>
+                <div class="h-4 w-px bg-white/10"></div>
+                <a href="#contact" class="text-sm font-bold text-white bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full transition-all">
                     Contact Engineering
                 </a>
             </div>
 
-            <button class="lg:hidden text-white" onclick="toggleMenu()" aria-label="Toggle Menu">
-                <i data-lucide="menu" class="w-5 h-5"></i>
+            <button class="lg:hidden text-slate-300" onclick="toggleMenu()" aria-label="Toggle Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden absolute top-16 left-0 w-full bg-[#0a0a0a] border-b border-zinc-800 p-6 flex flex-col gap-6">
-            <a href="#technology" onclick="toggleMenu()" class="text-xs font-bold uppercase tracking-widest text-zinc-400">Architecture</a>
-            <a href="#solutions" onclick="toggleMenu()" class="text-xs font-bold uppercase tracking-widest text-zinc-400">Deployments</a>
-            <a href="#sizing" onclick="toggleMenu()" class="text-xs font-bold uppercase tracking-widest text-zinc-400">Configurator</a>
-            <a href="#contact" onclick="toggleMenu()" class="text-xs font-bold uppercase tracking-widest text-brand-500">Contact Engineering</a>
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-[#0b1120] border-b border-white/5 p-6 flex flex-col gap-6 shadow-2xl">
+            <a href="#products" onclick="toggleMenu()" class="text-sm font-medium text-slate-300">Products</a>
+            <a href="#benefits" onclick="toggleMenu()" class="text-sm font-medium text-slate-300">Benefits</a>
+            <a href="#sizing" onclick="toggleMenu()" class="text-sm font-medium text-slate-300">Sizing Tool</a>
+            <a href="#contact" onclick="toggleMenu()" class="text-sm font-bold text-emerald-500">Contact Engineering</a>
         </div>
     </nav>
 
-    <main class="relative z-10 pt-16">
+    <main class="relative z-10 pt-20">
         
         <!-- Hero Section -->
-        <section class="min-h-[90vh] flex flex-col justify-center border-b border-zinc-800 bg-[#050505] relative overflow-hidden">
+        <section class="min-h-[85vh] flex flex-col justify-center relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 w-full py-20 relative z-10">
-                
-                <!-- Breadcrumb/Status -->
-                <div class="flex items-center gap-3 mb-8 fade-in">
-                    <span class="px-2 py-1 border border-brand-900 bg-brand-900/10 text-brand-500 text-[10px] font-bold uppercase tracking-widest rounded-sm">
-                        System Active
-                    </span>
-                    <span class="h-px w-8 bg-zinc-800"></span>
-                    <span class="text-tech text-[10px] text-zinc-500">Ref: OEM-2026-IND</span>
-                </div>
-
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="fade-in">
-                        <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[0.95] mb-8">
-                            INFRASTRUCTURE<br>
-                            FOR THE<br>
-                            <span class="text-zinc-500">ATOM.</span>
+                    <div class="fade-in order-2 lg:order-1">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-8">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            Now shipping Generation 8 Modular Systems
+                        </div>
+                        <h1 class="text-5xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+                            Infrastructure for industrial hydrogen.
                         </h1>
-                        <p class="text-lg text-zinc-400 max-w-lg mb-12 font-light leading-relaxed border-l-2 border-brand-600 pl-6">
-                            Site-integrated hardware for industrial-scale hydrogen loops. Production, storage, and dispensing modules engineered for resilience.
+                        <p class="text-lg text-slate-400 max-w-lg mb-10 leading-relaxed">
+                            A complete site-integrated hardware platform. We deliver modular production, storage, and dispensing loops designed for reliability in heavy-industry environments.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#sizing" class="bg-white hover:bg-zinc-200 text-black px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-sm transition-colors text-center">
-                                Configure System
+                            <a href="#sizing" class="btn-primary px-8 py-4 text-sm font-semibold rounded-lg text-center">
+                                Size Your System
                             </a>
-                            <a href="#contact" class="border border-zinc-700 hover:border-white text-zinc-300 hover:text-white px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-sm transition-all text-center">
-                                Request Datasheet
+                            <a href="#products" class="btn-secondary px-8 py-4 text-sm font-semibold rounded-lg text-center">
+                                View Hardware
                             </a>
+                        </div>
+                        
+                        <!-- Trust Signals -->
+                        <div class="mt-12 flex items-center gap-8 text-slate-500">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                <span class="text-xs font-medium">ASME Certified</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                <span class="text-xs font-medium">NFPA 2 Compliant</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                                <span class="text-xs font-medium">Global Support</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Schematic Diagram (SVG) -->
-                    <div class="fade-in lg:translate-x-12 relative">
-                        <div class="absolute top-0 right-0 p-2 border border-zinc-800 bg-black text-[10px] text-zinc-500 font-mono z-10">
-                            FIG 1.0 - MODULAR ARRAY
-                        </div>
-                        <svg viewBox="0 0 600 400" class="w-full h-auto drop-shadow-2xl" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <!-- Definitions -->
-                            <defs>
-                                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="1"/>
-                                </pattern>
-                            </defs>
-                            
-                            <!-- Base Grid -->
-                            <rect x="0" y="0" width="600" height="400" fill="url(#grid)" opacity="0.5"/>
+                    <!-- Visual Anchor -->
+                    <div class="fade-in order-1 lg:order-2 relative">
+                        <!-- Abstract "Glow" behind the product -->
+                        <div class="absolute inset-0 bg-emerald-500/20 blur-[100px] rounded-full opacity-40"></div>
+                        
+                        <!-- Product SVG Diagram -->
+                        <svg viewBox="0 0 600 450" class="w-full h-auto relative drop-shadow-2xl filter saturate-90" fill="none">
+                             <!-- Platform Base -->
+                             <path d="M50 300 L300 420 L550 300 L300 180 Z" fill="#1e293b" opacity="0.6"/>
+                             <path d="M50 300 L300 420 L300 430 L50 310 Z" fill="#0f172a" opacity="0.8"/>
+                             <path d="M550 300 L300 420 L300 430 L550 310 Z" fill="#0f172a" opacity="1"/>
 
-                            <!-- Connecting Pipes (Background) -->
-                            <path d="M150 250 L250 250 L250 150 L350 150" stroke="#3f3f46" stroke-dasharray="4 4" opacity="0.5"/>
-                            <path d="M350 150 L450 150 L450 250" stroke="#3f3f46" stroke-dasharray="4 4" opacity="0.5"/>
+                             <!-- Grid on Platform -->
+                             <path d="M100 276 L300 372 L500 276 M150 252 L300 324 L450 252" stroke="#334155" opacity="0.4"/>
 
-                            <!-- Production Pod -->
-                            <g transform="translate(50, 200)">
-                                <!-- Shadow -->
-                                <rect x="5" y="5" width="100" height="120" fill="#000" opacity="0.5"/>
-                                <!-- Main Body -->
-                                <rect x="0" y="0" width="100" height="120" fill="#0a0a0a" stroke="#52525b"/>
-                                <!-- Detail Lines -->
-                                <line x1="10" y1="20" x2="90" y2="20" stroke="#27272a"/>
-                                <line x1="10" y1="30" x2="90" y2="30" stroke="#27272a"/>
-                                <rect x="20" y="50" width="60" height="50" stroke="#27272a"/>
-                                <!-- Label -->
-                                <text x="50" y="-15" text-anchor="middle" class="font-mono text-[10px] fill-zinc-500 font-bold" stroke="none">PRODUCTION</text>
-                                <text x="50" y="80" text-anchor="middle" class="font-mono text-[8px] fill-emerald-600 font-bold" stroke="none">ACTIVE</text>
-                            </g>
+                             <!-- Production Unit (Left) -->
+                             <g transform="translate(130, 160)">
+                                 <path d="M0 40 L60 70 L60 190 L0 160 Z" fill="#334155"/> <!-- Front -->
+                                 <path d="M60 70 L120 40 L120 160 L60 190 Z" fill="#1e293b"/> <!-- Side -->
+                                 <path d="M0 40 L60 10 L120 40 L60 70 Z" fill="#475569"/> <!-- Top -->
+                                 <rect x="15" y="80" width="30" height="60" fill="#0f172a" opacity="0.5"/>
+                                 <circle cx="30" cy="110" r="8" fill="#10b981"/>
+                                 <text x="30" y="170" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8" font-weight="bold">H2 GEN</text>
+                             </g>
 
-                            <!-- Storage Pod -->
-                            <g transform="translate(250, 100)">
-                                <!-- Shadow -->
-                                <rect x="5" y="5" width="100" height="140" fill="#000" opacity="0.5"/>
-                                <!-- Main Body -->
-                                <rect x="0" y="0" width="100" height="140" fill="#0a0a0a" stroke="#52525b"/>
-                                <!-- Cylinders Hint -->
-                                <line x1="25" y1="10" x2="25" y2="130" stroke="#27272a"/>
-                                <line x1="50" y1="10" x2="50" y2="130" stroke="#27272a"/>
-                                <line x1="75" y1="10" x2="75" y2="130" stroke="#27272a"/>
-                                <!-- Label -->
-                                <text x="50" y="-15" text-anchor="middle" class="font-mono text-[10px] fill-zinc-500 font-bold" stroke="none">STORAGE</text>
-                                <text x="50" y="155" text-anchor="middle" class="font-mono text-[8px] fill-zinc-600" stroke="none">700 BAR</text>
-                            </g>
+                             <!-- Storage Unit (Middle Back) -->
+                             <g transform="translate(260, 100)">
+                                 <path d="M0 40 L50 65 L50 200 L0 175 Z" fill="#334155"/>
+                                 <path d="M50 65 L100 40 L100 175 L50 200 Z" fill="#1e293b"/>
+                                 <path d="M0 40 L50 15 L100 40 L50 65 Z" fill="#475569"/>
+                                 <!-- Cylinder details -->
+                                 <path d="M25 60 L25 180" stroke="#475569" stroke-width="4"/>
+                                 <path d="M50 70 L50 190" stroke="#475569" stroke-width="4"/>
+                                 <path d="M75 60 L75 180" stroke="#475569" stroke-width="4"/>
+                                 <text x="50" y="220" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8" font-weight="bold">BUFFER</text>
+                             </g>
 
-                            <!-- Dispensing Pod -->
-                            <g transform="translate(450, 200)">
-                                <!-- Shadow -->
-                                <rect x="5" y="5" width="80" height="120" fill="#000" opacity="0.5"/>
-                                <!-- Main Body -->
-                                <rect x="0" y="0" width="80" height="120" fill="#0a0a0a" stroke="#52525b"/>
-                                <!-- Screen -->
-                                <rect x="20" y="20" width="40" height="30" fill="#18181b" stroke="#27272a"/>
-                                <!-- Hose -->
-                                <path d="M60 70 Q 90 90 90 120" stroke="#27272a" fill="none"/>
-                                <!-- Label -->
-                                <text x="40" y="-15" text-anchor="middle" class="font-mono text-[10px] fill-zinc-500 font-bold" stroke="none">DISPENSING</text>
-                            </g>
-
-                            <!-- Flow Indicators -->
-                            <circle cx="200" cy="250" r="3" fill="#10b981"/>
-                            <circle cx="400" cy="150" r="3" fill="#10b981"/>
+                             <!-- Dispenser (Right) -->
+                             <g transform="translate(370, 200)">
+                                <path d="M0 30 L40 50 L40 140 L0 120 Z" fill="#334155"/>
+                                <path d="M40 50 L80 30 L80 120 L40 140 Z" fill="#1e293b"/>
+                                <path d="M0 30 L40 10 L80 30 L40 50 Z" fill="#475569"/>
+                                <rect x="10" y="50" width="20" height="30" fill="#0f172a"/>
+                                <text x="40" y="155" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8" font-weight="bold">PUMP</text>
+                             </g>
                         </svg>
                     </div>
                 </div>
-
-                <!-- Technical Strip -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800 mt-24 border border-zinc-800">
-                    <div class="bg-[#050505] p-6 hover:bg-[#0a0a0a] transition-colors">
-                        <div class="text-tech text-xs text-zinc-500 mb-2">Capacity</div>
-                        <div class="text-2xl font-bold text-white">225 <span class="text-sm font-normal text-zinc-500">kg/day</span></div>
-                    </div>
-                    <div class="bg-[#050505] p-6 hover:bg-[#0a0a0a] transition-colors">
-                        <div class="text-tech text-xs text-zinc-500 mb-2">Pressure</div>
-                        <div class="text-2xl font-bold text-white">700 <span class="text-sm font-normal text-zinc-500">bar</span></div>
-                    </div>
-                    <div class="bg-[#050505] p-6 hover:bg-[#0a0a0a] transition-colors">
-                        <div class="text-tech text-xs text-zinc-500 mb-2">Purity</div>
-                        <div class="text-2xl font-bold text-white">99.99<span class="text-sm font-normal text-zinc-500">%</span></div>
-                    </div>
-                    <div class="bg-[#050505] p-6 hover:bg-[#0a0a0a] transition-colors">
-                        <div class="text-tech text-xs text-zinc-500 mb-2">Standard</div>
-                        <div class="text-2xl font-bold text-white">J2601 <span class="text-sm font-normal text-zinc-500">compliant</span></div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Technology Section -->
-        <section id="technology" class="py-24 border-b border-zinc-800 bg-[#080808]">
+        <!-- Why It Matters Section (Lighter Background) -->
+        <section id="benefits" class="py-24 bg-[#0f172a]">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in">
-                    <div>
-                        <h2 class="text-tech text-brand-600 text-xs mb-4">Hardware Architecture</h2>
-                        <h3 class="text-3xl font-bold text-white uppercase tracking-tight">The Modular Loop.</h3>
-                    </div>
-                    <p class="text-zinc-500 text-sm max-w-sm mt-4 md:mt-0 leading-relaxed font-mono">
-                        // Decoupled subsystems for maximum uptime and maintenance accessibility.
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-3xl font-bold text-white mb-4">Built for resilience, not just specifications.</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto">
+                        Industrial hydrogen adoption often stalls at the infrastructure layer. We removed the complexity of custom EPC work by productizing the entire mid-stream loop.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6 fade-in">
-                    <!-- Card 1 -->
-                    <div class="matte-panel p-8 rounded-sm group">
-                        <div class="flex justify-between items-start mb-12">
-                            <i data-lucide="cpu" class="text-zinc-500 group-hover:text-white transition-colors w-6 h-6"></i>
-                            <span class="text-tech text-[10px] text-zinc-600 border border-zinc-800 px-1 py-0.5">MOD_01</span>
+                <div class="grid md:grid-cols-3 gap-8 fade-in">
+                    <!-- Benefit 1 -->
+                    <div class="p-8 rounded-xl bg-[#1e293b] border border-white/5">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500 mb-6">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Production Pod</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">PEM electrolysis cabinets designed for outdoor pads. Converts power and water to H2 with 94% stack efficiency.</p>
-                        <div class="mt-8 pt-4 border-t border-zinc-800 flex justify-between items-center">
-                            <span class="text-[10px] font-bold text-zinc-600 uppercase">Input: 480V 3-Phase</span>
-                            <div class="w-2 h-2 bg-zinc-800 rounded-full group-hover:bg-brand-600 transition-colors"></div>
-                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Rapid Permitting</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Our standardized pods come with pre-approved engineering packages for major jurisdictions, reducing site planning time by up to 60%.
+                        </p>
                     </div>
-
-                    <!-- Card 2 -->
-                    <div class="matte-panel p-8 rounded-sm group">
-                        <div class="flex justify-between items-start mb-12">
-                            <i data-lucide="cylinder" class="text-zinc-500 group-hover:text-white transition-colors w-6 h-6"></i>
-                            <span class="text-tech text-[10px] text-zinc-600 border border-zinc-800 px-1 py-0.5">MOD_02</span>
+                     <!-- Benefit 2 -->
+                     <div class="p-8 rounded-xl bg-[#1e293b] border border-white/5">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500 mb-6">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Storage Array</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Cascaded high-pressure vessels (Type IV) configured to buffer intermittent renewable supply against demand.</p>
-                        <div class="mt-8 pt-4 border-t border-zinc-800 flex justify-between items-center">
-                            <span class="text-[10px] font-bold text-zinc-600 uppercase">Cap: 300kg / Unit</span>
-                            <div class="w-2 h-2 bg-zinc-800 rounded-full group-hover:bg-brand-600 transition-colors"></div>
-                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">99.5% Uptime SLA</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Redundant stack architecture means maintenance can happen on individual modules without taking the entire production facility offline.
+                        </p>
                     </div>
-
-                    <!-- Card 3 -->
-                    <div class="matte-panel p-8 rounded-sm group">
-                        <div class="flex justify-between items-start mb-12">
-                            <i data-lucide="fuel" class="text-zinc-500 group-hover:text-white transition-colors w-6 h-6"></i>
-                            <span class="text-tech text-[10px] text-zinc-600 border border-zinc-800 px-1 py-0.5">MOD_03</span>
+                     <!-- Benefit 3 -->
+                     <div class="p-8 rounded-xl bg-[#1e293b] border border-white/5">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500 mb-6">
+                            <i data-lucide="scale" class="w-6 h-6"></i>
                         </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Dispensing Unit</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Dual-hose interface for heavy-duty fleet refueling. Integrated cooling for SAE J2601 T40 protocols.</p>
-                        <div class="mt-8 pt-4 border-t border-zinc-800 flex justify-between items-center">
-                            <span class="text-[10px] font-bold text-zinc-600 uppercase">Flow: 3.6 kg/min</span>
-                            <div class="w-2 h-2 bg-zinc-800 rounded-full group-hover:bg-brand-600 transition-colors"></div>
-                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Tax Credit Optimized</h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            Integrated metering and verification hardware specifically designed to satisfy 45V compliance reporting requirements automatically.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Configuration Calculator -->
-        <section id="sizing" class="py-24 border-b border-zinc-800 bg-[#050505]">
-            <div class="max-w-5xl mx-auto px-6">
-                <div class="mb-12 text-center fade-in">
-                     <h2 class="text-tech text-zinc-500 text-xs mb-4">System Sizing</h2>
-                     <h3 class="text-3xl font-bold text-white uppercase tracking-tight">Configuration Parameters</h3>
+        <!-- Product Hardware Section -->
+        <section id="products" class="py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-16 fade-in">
+                    <h2 class="text-3xl font-bold text-white mb-4">Core Hardware Modules</h2>
+                    <p class="text-slate-400">Deployable independently or as a unified site loop.</p>
                 </div>
 
-                <div class="bg-[#0a0a0a] border border-zinc-800 rounded-md p-1 md:p-2 fade-in">
-                    <div class="grid md:grid-cols-12 gap-0">
-                        
-                        <!-- Control Panel -->
-                        <div class="md:col-span-7 p-8 md:p-12 space-y-10 md:border-r border-zinc-800">
-                            <!-- Input 1 -->
+                <div class="grid lg:grid-cols-3 gap-6 fade-in">
+                    <!-- Production Pod -->
+                    <div class="oem-panel p-8">
+                        <div class="h-48 bg-gradient-to-b from-slate-800 to-slate-900 rounded-lg mb-8 flex items-center justify-center border border-white/5">
+                            <!-- Placeholder Icon Graphic -->
+                            <i data-lucide="cpu" class="w-16 h-16 text-slate-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Production Pod</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            Containerized PEM electrolysis system. Converts water and renewable power into high-purity hydrogen gas on-site.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                480V 3-Phase Input
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                200 - 1000 kg/day per unit
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                Integrated water deionization
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 transition-colors text-sm font-medium">Download Spec Sheet</button>
+                    </div>
+
+                    <!-- Storage Pod -->
+                    <div class="oem-panel p-8">
+                        <div class="h-48 bg-gradient-to-b from-slate-800 to-slate-900 rounded-lg mb-8 flex items-center justify-center border border-white/5">
+                            <i data-lucide="cylinder" class="w-16 h-16 text-slate-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Storage Array</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            Cascaded high-pressure vessels designed to buffer intermittent renewable energy supply against constant demand.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                500 bar & 900 bar options
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                300kg capacity per module
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                Type IV composite vessels
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 transition-colors text-sm font-medium">Download Spec Sheet</button>
+                    </div>
+
+                    <!-- Dispensing Pod -->
+                    <div class="oem-panel p-8">
+                        <div class="h-48 bg-gradient-to-b from-slate-800 to-slate-900 rounded-lg mb-8 flex items-center justify-center border border-white/5">
+                            <i data-lucide="fuel" class="w-16 h-16 text-slate-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Dispensing Unit</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            Dual-hose interface for heavy-duty fleet refueling. Supports back-to-back fills for Class 8 trucks and forklifts.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                SAE J2601 T40 Protocol
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                3.6 kg/min flow rate
+                            </li>
+                            <li class="flex items-center text-sm text-slate-300">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 mr-3"></i>
+                                Integrated POS & cloud tracking
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 transition-colors text-sm font-medium">Download Spec Sheet</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sizing Calculator (Lighter, Tool-like) -->
+        <section id="sizing" class="py-24 bg-[#0f172a] border-y border-white/5">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-3xl font-bold text-white mb-4">Project Estimator</h2>
+                    <p class="text-slate-400">Get a rough hardware configuration based on your daily demand.</p>
+                </div>
+
+                <div class="bg-[#1e293b] rounded-2xl shadow-2xl overflow-hidden border border-white/5 fade-in">
+                    <div class="grid md:grid-cols-2">
+                        <!-- Controls -->
+                        <div class="p-10 space-y-10">
                             <div>
-                                <div class="flex justify-between mb-4">
-                                    <label class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Target Output (Daily)</label>
-                                    <span id="kg-display" class="text-tech text-brand-500 font-bold">225 KG</span>
+                                <div class="flex justify-between mb-4 items-center">
+                                    <label class="text-sm font-bold text-slate-300">Daily Demand</label>
+                                    <span class="text-emerald-400 font-mono bg-emerald-500/10 px-2 py-1 rounded text-sm font-bold" id="kg-display">225 KG</span>
                                 </div>
-                                <input type="range" id="kg-input" min="50" max="1000" step="25" value="225" oninput="updateCalc()">
-                                <div class="flex justify-between mt-2 text-[9px] text-zinc-600 font-mono">
-                                    <span>50 KG</span>
-                                    <span>1000 KG</span>
-                                </div>
+                                <input type="range" id="kg-input" min="50" max="2000" step="50" value="225" oninput="updateCalc()">
+                                <p class="text-xs text-slate-500 mt-3">Total hydrogen required per 24 hour period.</p>
                             </div>
 
-                            <!-- Input 2 -->
-                             <div>
-                                <div class="flex justify-between mb-4">
-                                    <label class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Resilience Buffer</label>
-                                    <span id="backup-display" class="text-tech text-brand-500 font-bold">12 HRS</span>
+                            <div>
+                                <div class="flex justify-between mb-4 items-center">
+                                    <label class="text-sm font-bold text-slate-300">Storage Buffer</label>
+                                    <span class="text-emerald-400 font-mono bg-emerald-500/10 px-2 py-1 rounded text-sm font-bold" id="backup-display">12 HRS</span>
                                 </div>
                                 <input type="range" id="backup-input" min="0" max="48" step="6" value="12" oninput="updateCalc()">
-                                <div class="flex justify-between mt-2 text-[9px] text-zinc-600 font-mono">
-                                    <span>0 HRS</span>
-                                    <span>48 HRS</span>
+                                <p class="text-xs text-slate-500 mt-3">Autonomy required during renewable downtime.</p>
+                            </div>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="bg-[#0f172a] p-10 flex flex-col justify-center border-l border-white/5">
+                            <h4 class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-6">Recommended Hardware</h4>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-300 font-medium">Production Units</span>
+                                    <span class="text-2xl font-bold text-white" id="pod-result">1</span>
+                                </div>
+                                <div class="h-px bg-white/5 w-full"></div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-300 font-medium">Storage Modules</span>
+                                    <span class="text-2xl font-bold text-white" id="storage-result">1</span>
+                                </div>
+                                <div class="h-px bg-white/5 w-full"></div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-300 font-medium">Est. Footprint</span>
+                                    <span class="text-2xl font-bold text-white" id="footprint-result">1,200 sf</span>
+                                </div>
+                            </div>
+
+                            <button class="mt-8 w-full btn-primary py-3 rounded-lg text-sm font-bold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                                Request Quote for this Config
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-slate-500 mt-6">Estimates for planning purposes only. Site conditions may affect final sizing.</p>
+            </div>
+        </section>
+
+        <!-- Contact & Footer -->
+        <footer id="contact" class="bg-[#0b1120] pt-24 pb-12">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-16 mb-24 border border-white/5 fade-in">
+                    <div class="grid lg:grid-cols-2 gap-16">
+                        <div>
+                            <h2 class="text-3xl font-bold text-white mb-6">Start your site assessment.</h2>
+                            <p class="text-slate-400 mb-8 leading-relaxed">
+                                Our engineering team will review your location, power availability, and fleet needs to provide a feasibility report within 48 hours.
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-slate-700/50 p-2 rounded-lg text-slate-300">
+                                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-white font-medium">Engineering HQ</h5>
+                                        <p class="text-slate-400 text-sm">Santa Ana, California</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-slate-700/50 p-2 rounded-lg text-slate-300">
+                                        <i data-lucide="mail" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-white font-medium">Email Us</h5>
+                                        <p class="text-slate-400 text-sm">engineering@rockwellh2.com</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Readout Panel -->
-                        <div class="md:col-span-5 bg-[#080808] p-8 md:p-12 flex flex-col justify-center space-y-6">
-                            <div>
-                                <span class="block text-[9px] uppercase tracking-widest text-zinc-600 mb-1">Hardware Config</span>
-                                <div id="pod-result" class="text-2xl font-bold text-white font-mono">1.0 UNIT</div>
+                        <form class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="First Name" class="bg-[#0b1120] border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors">
+                                <input type="text" placeholder="Last Name" class="bg-[#0b1120] border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors">
                             </div>
-                            <div class="w-full h-px bg-zinc-800"></div>
-                            <div>
-                                <span class="block text-[9px] uppercase tracking-widest text-zinc-600 mb-1">Est. Footprint</span>
-                                <div id="footprint-result" class="text-2xl font-bold text-white font-mono">1,200 SF</div>
-                            </div>
-                            <div class="w-full h-px bg-zinc-800"></div>
-                            <div>
-                                <span class="block text-[9px] uppercase tracking-widest text-zinc-600 mb-1">Peak Power Draw</span>
-                                <div id="power-result" class="text-2xl font-bold text-white font-mono">560 KW</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-center text-[10px] text-zinc-600 mt-6 font-mono uppercase">Values are estimates for conceptual planning only.</p>
-            </div>
-        </section>
-
-        <!-- Solutions List -->
-        <section id="solutions" class="py-24 border-b border-zinc-800 bg-[#080808]">
-            <div class="max-w-7xl mx-auto px-6">
-                <h3 class="text-2xl font-bold text-white uppercase tracking-tight mb-12 fade-in">Industrial Applications</h3>
-                
-                <div class="grid md:grid-cols-2 gap-px bg-zinc-800 border border-zinc-800 fade-in">
-                    <!-- Item 1 -->
-                    <div class="bg-[#0a0a0a] p-10 hover:bg-[#0f0f0f] transition-colors group">
-                        <div class="w-10 h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-6 rounded-sm">
-                            <i data-lucide="anchor" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-3">Maritime & Ports</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Decarbonizing drayage trucks and terminal tractors. High-speed filling protocols ensure operational continuity during vessel turnarounds.</p>
-                    </div>
-                    <!-- Item 2 -->
-                    <div class="bg-[#0a0a0a] p-10 hover:bg-[#0f0f0f] transition-colors group">
-                        <div class="w-10 h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-6 rounded-sm">
-                            <i data-lucide="factory" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-3">Steel & Cement</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Providing green feedstock for thermal processes. Reducing Scope 1 emissions in hard-to-abate manufacturing sectors.</p>
-                    </div>
-                    <!-- Item 3 -->
-                    <div class="bg-[#0a0a0a] p-10 hover:bg-[#0f0f0f] transition-colors group">
-                        <div class="w-10 h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-6 rounded-sm">
-                            <i data-lucide="package" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-3">Logistics Centers</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Replacing battery charging rooms with compact hydrogen dispensers. 3-minute fills for 24/7 forklift fleet availability.</p>
-                    </div>
-                    <!-- Item 4 -->
-                    <div class="bg-[#0a0a0a] p-10 hover:bg-[#0f0f0f] transition-colors group">
-                        <div class="w-10 h-10 bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-6 rounded-sm">
-                            <i data-lucide="zap" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-3">Microgrid Storage</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Long-duration energy storage for off-grid operations. Converting excess solar into stable hydrogen fuel reserves.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact / Footer -->
-        <footer id="contact" class="bg-[#050505] pt-24 pb-12">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-16 mb-24 border-b border-zinc-800 pb-24">
-                    <div class="fade-in">
-                        <h2 class="text-4xl font-bold text-white uppercase tracking-tight mb-8">Initiate Project.</h2>
-                        <p class="text-zinc-400 mb-10 max-w-md">Connect with our engineering division for site feasibility analysis and detailed datasheets.</p>
-                        
-                        <div class="space-y-4 font-mono text-sm text-zinc-500">
-                            <p>EMAIL: ENGINEERING@ROCKWELLH2.COM</p>
-                            <p>HQ: SANTA ANA, CALIFORNIA</p>
-                            <p>LIC: 884-291-CA</p>
-                        </div>
-                    </div>
-
-                    <form class="space-y-4 fade-in">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-[9px] uppercase font-bold text-zinc-500 tracking-widest">First Name</label>
-                                <input type="text" class="w-full bg-[#0a0a0a] border border-zinc-800 text-white p-3 rounded-sm text-sm focus:border-brand-600 focus:outline-none transition-colors">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[9px] uppercase font-bold text-zinc-500 tracking-widest">Last Name</label>
-                                <input type="text" class="w-full bg-[#0a0a0a] border border-zinc-800 text-white p-3 rounded-sm text-sm focus:border-brand-600 focus:outline-none transition-colors">
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[9px] uppercase font-bold text-zinc-500 tracking-widest">Company Email</label>
-                            <input type="email" class="w-full bg-[#0a0a0a] border border-zinc-800 text-white p-3 rounded-sm text-sm focus:border-brand-600 focus:outline-none transition-colors">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[9px] uppercase font-bold text-zinc-500 tracking-widest">Project Scope</label>
-                            <select class="w-full bg-[#0a0a0a] border border-zinc-800 text-zinc-400 p-3 rounded-sm text-sm focus:border-brand-600 focus:outline-none transition-colors appearance-none">
-                                <option>Select Application...</option>
-                                <option>Logistics / Forklift Fleet</option>
-                                <option>Heavy Duty Transport</option>
-                                <option>Industrial Heat / Chemical</option>
+                            <input type="email" placeholder="Work Email" class="w-full bg-[#0b1120] border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors">
+                            <select class="w-full bg-[#0b1120] border border-slate-700 rounded-lg px-4 py-3 text-slate-400 focus:outline-none focus:border-emerald-500 transition-colors">
+                                <option>Project Type...</option>
+                                <option>Logistics / Forklifts</option>
+                                <option>Heavy Duty Trucking</option>
+                                <option>Industrial Process</option>
                             </select>
-                        </div>
-                        <button class="w-full bg-white text-black font-bold uppercase tracking-widest text-xs py-4 rounded-sm hover:bg-zinc-200 transition-colors mt-6">
-                            Submit Inquiry
-                        </button>
-                    </form>
+                            <button class="w-full btn-primary py-4 rounded-lg font-bold text-sm">Submit Inquiry</button>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase text-zinc-600 font-bold tracking-widest">
-                    <p>&copy; 2026 Rockwell Engineering.</p>
-                    <div class="flex gap-8 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                        <a href="#" class="hover:text-white transition-colors">Terms</a>
-                        <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+                <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-sm text-slate-500">
+                    <p>&copy; 2026 Rockwell Engineering. All rights reserved.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0 font-medium">
+                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
                     </div>
                 </div>
             </div>
@@ -545,7 +526,7 @@
     <script>
         lucide.createIcons();
 
-        // Reveal Animation
+        // Intersection Observer for Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -553,40 +534,34 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Mobile Menu Toggle
+        // Mobile Menu
         function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // Calculator Logic
+        // Calculator
         function updateCalc() {
             const kg = parseInt(document.getElementById('kg-input').value);
             const backup = parseInt(document.getElementById('backup-input').value);
             
-            // Displays
-            document.getElementById('kg-display').innerText = kg + " KG";
+            document.getElementById('kg-display').innerText = kg.toLocaleString() + " KG";
             document.getElementById('backup-display').innerText = backup + " HRS";
             
-            // Logic
-            // Assume 1 production unit does up to 450kg/day
-            const units = Math.ceil(kg / 450); 
-            // Assume 1 storage unit holds 300kg. Buffer needed = (kg/24) * hours
+            // Logic: 1 unit = 500kg/day capacity
+            const units = Math.ceil(kg / 500); 
+            
+            // Storage logic: Buffer capacity needed = (daily demand / 24) * hours of backup
             const bufferNeeded = (kg / 24) * backup;
-            const storageUnits = Math.ceil(bufferNeeded / 300);
+            const storageUnits = Math.ceil(bufferNeeded / 300); // 300kg per storage module
             
-            // Footprint: Base 400sqft + 200 per unit
-            const area = 400 + (units * 400) + (storageUnits * 200);
+            // Footprint logic
+            const area = 400 + (units * 350) + (storageUnits * 200);
             
-            // Power: ~2.5kW per kg output rate
-            const power = Math.round(kg * 2.5);
-
-            document.getElementById('pod-result').innerText = `${units}.0 GEN / ${storageUnits}.0 STR`;
-            document.getElementById('footprint-result').innerText = area.toLocaleString() + " SF";
-            document.getElementById('power-result').innerText = power + " KW";
+            document.getElementById('pod-result').innerText = units;
+            document.getElementById('storage-result').innerText = storageUnits;
+            document.getElementById('footprint-result').innerText = area.toLocaleString() + " sf";
         }
         
-        // Init calc
         updateCalc();
     </script>
 </body>
