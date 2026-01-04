@@ -1,4 +1,4 @@
-# Rockwell H2, Netlify + Decap CMS (Plain HTML Template)
+# Rockwell H2, Netlify + Decap CMS 
 
 ## Deploy
 1) Push this repo to GitHub
